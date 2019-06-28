@@ -1,0 +1,13 @@
+#!/bin/bash
+
+
+
+HNAME=none
+while [ "${HNAME}"=="none" ]
+do
+HNAME=$(hostname)
+echo $HNAME
+sed -i s/masternode/`hostname`/g /opt/hadoop/etc/hadoop/core-site.xml
+done
+
+bash
