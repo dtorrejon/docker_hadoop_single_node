@@ -37,7 +37,7 @@ COPY /vol/runscript.sh /root/runscript.sh
 
 WORKDIR /
 
-RUN echo 'Y' | hdfs namenode -format 2>&1 format.output.log
+RUN echo 'Y' | hadoop namenode -format 2>&1 /vol/logs/format.output.log
 
 EXPOSE 9000
 
