@@ -16,10 +16,10 @@
 	</property>
 	<property>
 		<name>dfs.namenode.name.dir</name>
-		<value>/vol/data/namenode</value>
+		<value>/opt/data/namenode</value>
 	</property>
 	<property>
 		<name>dfs.datanode.data.dir</name>
-		<value>/vol/data/datanode</value>
+		<value>/opt/data/datanode</value>
 	</property>
 </configuration>
