@@ -1,26 +1,25 @@
 #!/bin/bash
 
-#RUN ssh-keygen -f id_rsa -t rsa -N ''
-#cp /root/.ssh/* /vol/
+sed -i s/localhost/`hostname`/g /opt/hadoop-3.2.0/etc/hadoop/core-site.xml
 
-#write the hostname in hadoop config files
-sed -i s/masternode/`hostname`/g /opt/hadoop-3.2.0/etc/hadoop/core-site.xml
+
+#sudo ssh-keygen -f /etc/ssh/ssh_host_rsa_key -t rsa -N ''
+#sudo ssh-keygen -f /etc/ssh/ssh_host_dsa_key -t dsa -N ''
+#sudo ssh-keygen -f /etc/ssh/ssh_host_ecdsa_key -t ecdsa -N ''
+#sudo ssh-keygen -f /etc/ssh/ssh_host_ed25519_key -t ed25519 -N ''
+
+#sudo cp /etc/ssh/ssh_host_rsa_key $HOME/.ssh/id_rsa
+#sudo cp /etc/ssh/ssh_host_rsa_key $HOME/.ssh/id_rsa.pub
+#cp $HOME/.ssh/id_rsa.pub $HOME/.ssh/authorized_keys
+
+
+# echo "Run sshd service..." 
+#sudo /bin/bash -c /usr/sbin/sshd -D
 
 #echo "Formating HDFS..."
-#echo 'Y' | hadoop namenode -format
+#'Y' | hadoop namenode -format
 
 #echo "Starting HDFS..."
-#/opt/hadoop-3.2.0/sbin/start-dfs.sh
-
-#echo "export JAVA_HOME=/usr/java/jdk-12.0.1/" >> etc/hadoop/hadoop-env.sh
-#ssh-keygen -f id_rsa -t rsa -N ''
-
-#echo "does it works?"
-#mkdir input
-#mkdir output
-#cp /opt/hadoop-3.2.0/etc/hadoop/*.xml input
-#hadoop jar /opt/hadoop-3.2.0/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.2.0.jar grep input output 'dfs[a-z.]+'
-#cat output/*
+#start-dfs.sh
 
 bash
-
