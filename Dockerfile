@@ -31,7 +31,6 @@ RUN yum install epel-release -y \
  && chown -R hadoop:hadoop /opt/data \
  && echo -e "ChangeThePassw0rd\nChangeThePassw0rd\n" | passwd hadoop
 
-
 COPY /vol/xml/core-site.xml /opt/hadoop-3.2.0/etc/hadoop/core-site.xml
 COPY /vol/xml/hdfs-site.xml /opt/hadoop-3.2.0/etc/hadoop/hdfs-site.xml
 COPY /vol/runscript.sh /home/hadoop/runscript.sh
@@ -41,10 +40,15 @@ COPY /vol/sudoers.txt /etc/sudoers
 COPY /vol/sshd_config.txt /etc/ssh/sshd_config
 COPY /vol/hadoop-env.sh /opt/hadoop-3.2.0/etc/hadoop/hadoop-env.sh
 
+#RUN mkdir -p /usr/hadoop/keys
+#WORKDIR /usr/hadoop/keys
+#VOLUME . /usr/hadoop/keys
+
 EXPOSE 22
 EXPOSE 9000 8088 9870 19888
 
 USER hadoop
+
 
 WORKDIR /home/hadoop
 ENTRYPOINT ["./runscript.sh"]

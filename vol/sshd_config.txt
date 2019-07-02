@@ -24,7 +24,7 @@ LogLevel INFO
 LoginGraceTime 120
 PermitRootLogin without-password
 StrictModes yes
-StrictHostKeyChecking no
+#StrictHostKeyChecking no
 
 #RSAAuthentication yes
 PubkeyAuthentication yes
