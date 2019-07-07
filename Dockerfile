@@ -1,10 +1,11 @@
-FROM centos:7.6.1810
+FROM centos
 
 RUN yum install epel-release -y \
  && yum update -y \
  && yum install -y openssh-server \
                    sudo\
                    initscripts \
+                   cronie\
                    rsync \
                    openssh \
                    openssh-clients \
@@ -23,20 +24,17 @@ RUN yum install epel-release -y \
  && mkdir -p /opt/data/datanode \ 
  && mkdir -p /opt/data/namenode \
  && chown -R hadoop:hadoop /opt/data \
- && echo -e "ChangeThePassw0rd\nChangeThePassw0rd\n" | passwd hadoop 
+ && echo -e "ChangeThePassw0rd\nChangeThePassw0rd\n" | passwd hadoop \
+ && yum clean all
 
-#ADD /vol/keys/sshd/ /etc/ssh/
-#ADD /vol/keys/ssh/ /home/hadoop/.ssh/ 
-ADD /vol/xml/ /opt/hadoop-3.2.0/etc/hadoop/
-ADD /vol/runscript.sh /home/hadoop/runscript.sh
-ADD /vol/bashrc.txt /home/hadoop/.bashrc
-ADD /vol/bashrc.txt /root/.bashrc
-ADD /vol/sudoers.txt /etc/sudoers
-ADD /vol/sshd_config.txt /etc/ssh/sshd_config
-ADD /vol/hadoop-env.sh /opt/hadoop-3.2.0/etc/hadoop/hadoop-env.sh
-
-VOLUME /tmp/keys/ssh/:/home/
-VOLUME /tmp/keys/sshd/:/etc/ssh/
+COPY /vol/xml/ /opt/hadoop-3.2.0/etc/hadoop/
+COPY /vol/entrypoint.sh /home/hadoop/entrypoint.sh
+COPY /vol/bashrc.txt /home/hadoop/.bashrc
+COPY /vol/bashrc.txt /root/.bashrc
+COPY /vol/sudoers.txt /etc/sudoers
+COPY /vol/sshd_config.txt /etc/ssh/sshd_config
+COPY /vol/hadoop-env.sh /opt/hadoop-3.2.0/etc/hadoop/hadoop-env.sh
+COPY /vol/hadoop-start.sh /home/hadoop/hadoop-start.sh
 
 EXPOSE 22 \
        9000 \
@@ -47,5 +45,5 @@ EXPOSE 22 \
 
 USER hadoop
 WORKDIR /home/hadoop
-ENTRYPOINT ["./runscript.sh"]
+ENTRYPOINT ["./entrypoint.sh"]
 
