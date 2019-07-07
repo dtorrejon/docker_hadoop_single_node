@@ -49,29 +49,74 @@ COPY /vol/sshd_config.txt /etc/ssh/sshd_config
 #scrip used in order to format & start the pseudo-distributed node
 COPY /vol/hadoop-start.sh /home/hadoop/hadoop-start.sh
 
-#SSH port
+#SSH
 EXPOSE 22 \
 
-#HDFS PORTS
+#HDFS
+#NameNode WEB INTERFACE
        9870 \
-       50070 \
-       50470 \
-       8020 \
-       9000 \
-       50075 \
-       50475 \
-       50010 \
-       50020 \
-       50090 \
+       9871 \
 
-#MAPREDUCE PORTS
-       50090 \  
-       8021 \
-       50060 \
-       51111	
+#ResourceManager WEB INTERFACE
+       8088 \ 
+
+#Data Node. All slave nodes
+       9864 \
+       9866 \
+       9867 \
+
+#Secondary NameNode and any backup NameNodes
+       9868 \
+       9869 \
+
+#JournalNode
+       8485 \
+       8480 \
+       8481 \
+
+#Aliasmap Server
+       50200 \
 
 
+#MAPREDUCE
+#Service
 
+#MapReduce Job History
+       10020 \
+
+#MapReduce Job History UI
+       19888 \
+       19890 \
+
+#YARN
+        8032 \
+        8030 \
+        8088 \
+        8090 \
+        8031 \
+        8033 \
+        8040 \
+        8048 \
+        8042 \
+        8044 \
+        10200 \
+        8188 \
+        8190 \
+        8047 \
+        8788 \
+        8046 \
+        8045 \
+        8049 \
+        8089 \
+        8091 \
+
+#History server admin
+       10033 \
+
+#fs.defaultFS
+       9000
+
+#Enter as HADOOP user
 USER hadoop
 WORKDIR /home/hadoop
 ENTRYPOINT ["./entrypoint.sh"]
