@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sed -i s/localhost/`hostname`/g /opt/hadoop-3.2.0/etc/hadoop/core-site.xml
+#sed -i s/localhost/`hostname`/g /opt/hadoop-3.2.0/etc/hadoop/core-site.xml
 
 echo "generating SSH keys..."
 sleep 1
