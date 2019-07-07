@@ -1,10 +1,11 @@
 #!/bin/bash
 
 echo "Formating HDFS..."
-#'Y' | hadoop namenode -format
 hdfs namenode -format
-sleep 5
+sleep 2
 echo "Starting HDFS..."
-sleep 1
-start-dfs.sh
+sleep 2
+start-all.sh
+echo "Pocess checkout..."
+sleep 2
 jps
