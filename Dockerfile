@@ -1,40 +1,7 @@
 FROM centos
 
+#JAVA jdk .rpm
 COPY /vol/jdk12/ .
-
-#HADOOP & JAVA INSTALLATION
-RUN yum install epel-release -y \
- && yum update -y \
- && yum install -y openssh-server \
-                   sudo\
-                   initscripts \
-                   rsync \
-                   openssh \
-                   openssh-clients \
-                   openssl-libs \
-                   pdsh \
-                   wget \
- && wget http://us.mirrors.quenda.co/apache/hadoop/common/hadoop-3.2.0/hadoop-3.2.0.tar.gz \
- && tar -zxvf hadoop-3.2.0.tar.gz -C /opt/ \
- && rm hadoop-3.2.0.tar.gz \
- && useradd -ms /bin/bash hadoop \
- && usermod -aG root hadoop \
- && chown -R hadoop:hadoop /opt/hadoop-3.2.0 \
- && mkdir -p /opt/data/datanode \ 
- && mkdir -p /opt/data/namenode \
- && chown -R hadoop:hadoop /opt/data \
-
-#DEFAULT PASSWORD FOR HADOOP USERNAME
- && echo -e "ChangeThePassw0rd\nChangeThePassw0rd\n" | passwd hadoop \
- && yum clean all
-
-#JAVA jdk_12.0.2 install from local file
-
-RUN cat jdk-12.0.2_linux-x64_bin.rpm-* > jdk-12.0.2_linux-x64_bin.rpm \
-&& rpm -ivh jdk-12.0.2_linux-x64_bin.rpm \
-&& rm jdk-12.0.2_linux-x64_bin.rpm \
-&& rm jdk-12.0.2_linux-x64_bin.rpm-*
-
 
 #HADOOP config files
 COPY /vol/xml/ /opt/hadoop-3.2.0/etc/hadoop/
@@ -56,22 +23,56 @@ COPY /vol/sshd_config.txt /etc/ssh/sshd_config
 #scrip used in order to format & start the pseudo-distributed node
 COPY /vol/hadoop-start.sh /home/hadoop/hadoop-start.sh
 
-#Enter as HADOOP user
-USER hadoop
+
+#INSTALLING PACKAGES
+RUN yum install epel-release -y \
+ && yum update -y \
+ && yum install -y openssh-server \
+                   sudo\
+                   initscripts \
+                   rsync \
+                   openssh \
+                   openssh-clients \
+                   openssl-libs \
+                   pdsh \
+                   wget \
+                   clean all \
+ 
+ #HADOOP INSTALLATION 
+ && wget http://us.mirrors.quenda.co/apache/hadoop/common/hadoop-3.2.0/hadoop-3.2.0.tar.gz \
+ && tar -zxvf hadoop-3.2.0.tar.gz -C /opt/ \
+ && rm hadoop-3.2.0.tar.gz \
+ 
+ #CREATING HADOOP USER
+ && useradd -ms /bin/bash hadoop \
+ && usermod -aG root hadoop \
+ && chown -R hadoop:hadoop /opt/hadoop-3.2.0 \
+ && mkdir -p /opt/data/datanode \ 
+ && mkdir -p /opt/data/namenode \
+ && chown -R hadoop:hadoop /opt/data \
+
+#DEFAULT PASSWORD FOR HADOOP USERNAME
+ && echo -e "ChangeThePassw0rd\nChangeThePassw0rd\n" | passwd hadoop \ 
+
+#JAVA INSTALLATION (from local file)
+ && cat jdk-12.0.2_linux-x64_bin.rpm-* > jdk-12.0.2_linux-x64_bin.rpm \
+ && rpm -ivh jdk-12.0.2_linux-x64_bin.rpm \
+ && rm jdk-12.0.2_linux-x64_bin.rpm \
+ && rm jdk-12.0.2_linux-x64_bin.rpm-* \
 
 #HDFS format
-RUN /opt/hadoop-3.2.0/bin/hdfs namenode -format \
+ && /opt/hadoop-3.2.0/bin/hdfs namenode -format \
 
 #&& sed -i s/localhost/`hostname`/g /opt/hadoop-3.2.0/etc/hadoop/core-site.xml \
 
 #SSH configuration
-&& sudo ssh-keygen -f /etc/ssh/ssh_host_rsa_key -t rsa -N '' \
-&& sudo ssh-keygen -f /etc/ssh/ssh_host_dsa_key -t dsa -N '' \
-&& sudo ssh-keygen -f /etc/ssh/ssh_host_ecdsa_key -t ecdsa -N '' \
-&& sudo ssh-keygen -f /etc/ssh/ssh_host_ed25519_key -t ed25519 -N '' \
-&& ssh-keygen -f $HOME/.ssh/id_rsa -t rsa -N '' \
-&& cp $HOME/.ssh/id_rsa.pub $HOME/.ssh/authorized_keys \
-&& cp $HOME/.ssh/id_rsa.pub $HOME/.ssh/known_hosts
+ && sudo ssh-keygen -f /etc/ssh/ssh_host_rsa_key -t rsa -N '' \
+ && sudo ssh-keygen -f /etc/ssh/ssh_host_dsa_key -t dsa -N '' \
+ && sudo ssh-keygen -f /etc/ssh/ssh_host_ecdsa_key -t ecdsa -N '' \
+ && sudo ssh-keygen -f /etc/ssh/ssh_host_ed25519_key -t ed25519 -N '' \
+ && ssh-keygen -f $HOME/.ssh/id_rsa -t rsa -N '' \
+ && cp $HOME/.ssh/id_rsa.pub $HOME/.ssh/authorized_keys \
+ && cp $HOME/.ssh/id_rsa.pub $HOME/.ssh/known_hosts
 
 #SSH
 EXPOSE 22 \
@@ -140,7 +141,8 @@ EXPOSE 22 \
 #fs.defaultFS
        9000
 
-
+#Enter as HADOOP user
+USER hadoop
 WORKDIR /home/hadoop
 ENTRYPOINT ["./entrypoint.sh"]
 
