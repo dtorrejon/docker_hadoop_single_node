@@ -1,7 +1,12 @@
 FROM centos
 
-#COPY JAVA & HADOOP bin files
+LABEL version="0.1"
+LABEL maintainer="dtorrejon"
+LABEL email="david.torrejon.vazquez@gmail.com"
+LABEL hadoop_version="hadoop-3.2.0."
+LABEL java_version="jdk-12.0.2"
 
+#COPY JAVA & HADOOP bin files
 COPY /vol/hadoop/ .
 COPY /vol/jdk12/ .
 
