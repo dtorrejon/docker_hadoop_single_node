@@ -13,12 +13,14 @@ RUN yum install epel-release -y \
                    openssl-libs \
                    pdsh \
                    wget \
+                   at \
  && wget http://us.mirrors.quenda.co/apache/hadoop/common/hadoop-3.2.0/hadoop-3.2.0.tar.gz \
  && tar -zxvf hadoop-3.2.0.tar.gz -C /opt/ \
+ && rm hadoop-3.2.0.tar.gz \
  && curl -LO -H "Cookie: oraclelicense=accept-securebackup-cookie" \
-"https://download.oracle.com/otn-pub/java/jdk/12.0.1+12/69cfe15208a647278a19ef0990eea691/jdk-12.0.1_linux-x64_bin.rpm" \
- && rpm -ivh jdk-12.0.1_linux-x64_bin.rpm \
- && rm jdk-12.0.1_linux-x64_bin.rpm \
+"https://download.oracle.com/otn-pub/java/jdk/12.0.2+10/e482c34c86bd4bf8b56c0b35558996b9/jdk-12.0.2_linux-x64_bin.rpm?AuthParam=1563614907_601362f4a4c8514709d02d6928b78ab4" \
+ && rpm -ivh jdk-12.0.2_linux-x64_bin.rpm \
+ && rm jdk-12.0.2_linux-x64_bin.rpm \
  && useradd -ms /bin/bash hadoop \
  && usermod -aG root hadoop \
  && chown -R hadoop:hadoop /opt/hadoop-3.2.0 \

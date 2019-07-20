@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#sed -i s/localhost/`hostname`/g /opt/hadoop-3.2.0/etc/hadoop/core-site.xml
+sed -i s/localhost/`hostname`/g /opt/hadoop-3.2.0/etc/hadoop/core-site.xml
 
 echo "generating SSH keys..."
 sleep 1
@@ -25,6 +25,8 @@ sleep 1
 ssh-copy-id -o StrictHostKeyChecking=no -i $HOME/.ssh/id_rsa.pub -f `hostname`
 ssh-copy-id -o StrictHostKeyChecking=no -i $HOME/.ssh/id_rsa.pub -f localhost
 
-#sh /home/hadoop/hadoop-start.sh
+echo "runnig atd..."
+sudo /bin/bash -c /usr/sbin/atd -D
+echo "ping -c 4 www.google.com" | at  now + 3 seconds
 
 bash
