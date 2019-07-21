@@ -8,7 +8,7 @@ LABEL java_version="jdk-12.0.2"
 
 #COPY JAVA & HADOOP bin files
 COPY /vol/hadoop/ .
-COPY /vol/jdk12/ .
+COPY /vol/java8/ .
 
 #INSTALLING PACKAGES
 RUN yum install epel-release -y \
@@ -41,10 +41,10 @@ RUN yum install epel-release -y \
 
 #JAVA INSTALLATION
 
- && cat jdk-12.0.2_linux-x64_bin.rpm-* > jdk-12.0.2_linux-x64_bin.rpm \
- && rpm -ivh jdk-12.0.2_linux-x64_bin.rpm \
- && rm jdk-12.0.2_linux-x64_bin.rpm \
- && rm jdk-12.0.2_linux-x64_bin.rpm-* 
+ && cat jdk-8u221-linux-x64.rpm-* > jdk-8u221-linux-x64.rpm \
+ && rpm -ivh jdk-8u221-linux-x64.rpm \
+ && rm jdk-8u221-linux-x64.rpm \
+ && rm jdk-8u221-linux-x64.rpm-* 
 
 
 #HADOOP config files

@@ -52,7 +52,7 @@
 # The java implementation to use. By default, this environment
 # variable is REQUIRED on ALL platforms except OS X!
 
-export JAVA_HOME=/usr/java/jdk-12.0.2
+export JAVA_HOME=/usr/java/jdk1.8.0_221-amd64
 
 # Location of Hadoop.  By default, Hadoop will attempt to determine
 # this location based upon its execution path.
@@ -222,6 +222,8 @@ export HADOOP_SSH_OPTS="-p 22"
 # --daemon option of hadoop, hdfs, mapred and yarn command.
 # Java property: hadoop.root.logger
 # export HADOOP_DAEMON_ROOT_LOGGER=INFO,RFA
+#export YARN_RESOURCEMANAGER_OPTS="--add-modules=ALL-SYSTEM"
+#export HADOOP_OPTS="--add-modules java.activation"
 
 # Default log level and output location for security-related messages.
 # You will almost certainly want to change this on a per-daemon basis via
