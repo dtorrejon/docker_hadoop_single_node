@@ -64,8 +64,8 @@ COPY /vol/sudoers.txt /etc/sudoers
 #SSHD config file
 COPY /vol/sshd_config.txt /etc/ssh/sshd_config
 
-#scrip used in order to format & start the pseudo-distributed node
-COPY /vol/hadoop-start.sh /home/hadoop/hadoop-start.sh
+#scrip test
+COPY /vol/MRTest.sh /home/hadoop/map-reduce-test.sh
 
 # Change to hadoop user
 USER hadoop

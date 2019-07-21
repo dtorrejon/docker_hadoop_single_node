@@ -49,16 +49,35 @@
                                | |    
                                |_|   
 
+********************************************************
+*                                                      *
+*   Welcome to Docker HADOOP pseudo distributed node   *
+*                                                      *
+********************************************************
 
-Welcome to Docker HADOOP pseudo distributed node
+HADOOP version: 3.2.0
 
-HADOOP version:
-`hadoop version`
+JAVA version: jdk-8u221
 
-JAVA version:
-`java --version`
+--------------------------------------------------------
+WARNING!!!!
 
+This container needs at least 2GB RAM
+You can modify the parameters in yarn-site.xml & mapred-site.xml files
+
+--------------------------------------------------------
+SSH ACCESS
 username: hadoop
 password: ChangeThePassw0rd
 
 Please, for your security, change the password
+
+--------------------------------------------------------
+
+Type this commad and test map-reduce
+
+$ sh /home/hadoop/map-reduce-test.sh
+
+########################################################
+
+
