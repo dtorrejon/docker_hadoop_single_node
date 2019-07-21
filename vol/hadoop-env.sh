@@ -58,8 +58,6 @@ export JAVA_HOME=/usr/java/jdk-12.0.2
 # this location based upon its execution path.
 
 export HADOOP_HOME=/opt/hadoop-3.2.0
-#export HADOOP_HOME_WARN_SUPPRESS=”TRUE”
-
 
 # Location of Hadoop's configuration information.  i.e., where this
 # file is living. If this is not defined, Hadoop will attempt to
@@ -99,7 +97,6 @@ export HADOOP_HOME=/opt/hadoop-3.2.0
 # the operating system.  We have to set this here. See the next
 # section as to why....
 export HADOOP_OS_TYPE=${HADOOP_OS_TYPE:-$(uname -s)}
-#export HADOOP_OPTS=-Djava.net.preferIPv4Stack=true
 
 
 # Under certain conditions, Java on OS X will throw SCDynamicStore errors
@@ -220,8 +217,6 @@ export HADOOP_SSH_OPTS="-p 22"
 # Default log4j setting for interactive commands
 # Java property: hadoop.root.logger
 # export HADOOP_ROOT_LOGGER=INFO,console
-
-#export HADOOP_ROOT_LOGGER=”WARN,DRFA”
 
 # Default log4j setting for daemons spawned explicitly by
 # --daemon option of hadoop, hdfs, mapred and yarn command.

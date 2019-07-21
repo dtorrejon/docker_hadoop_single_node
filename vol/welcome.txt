@@ -1,3 +1,5 @@
+
+
                                                      `';|smqD%RRbEn?,`                               
                                                  `;IAQQQ%KkojnInjSU%QNj!`                            
                                               `!SQQ6t=!^<*?????*?***|nqQ&x,                          
@@ -46,15 +48,3 @@
  |_| |_|\__,_|\__,_|\___/ \___/| .__/ 
                                | |    
                                |_|    
-Welcome to Docker HADOOP pseudo distributed node
-
-HADOOP version:
-`hadoop version`
-
-JAVA version:
-`java --version`
-
-username: hadoop
-password: ChangeThePassw0rd
-
-Please, for your security, change the password
