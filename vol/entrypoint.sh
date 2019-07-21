@@ -11,6 +11,11 @@ ssh-copy-id -o StrictHostKeyChecking=no -i $HOME/.ssh/id_rsa.pub -f `hostname`
 ssh-copy-id -o StrictHostKeyChecking=no -i $HOME/.ssh/id_rsa.pub -f localhost
 
 echo "starting hadoop..."
-/opt/hadoop-3.2.0/sbin/start-all.sh
+/opt/hadoop-3.2.0/sbin/start-dfs.sh
+/opt/hadoop-3.2.0/sbin/start-yarn.sh
+/opt/hadoop-3.2.0/sbin/mr-jobhistory-daemon.sh
 
+cat /etc/hadoop-welcome.txt
+#mapred --daemon start historyserver
+#/opt/hadoop-3.2.0/sbin/mr-jobhistory-daemon.sh
 bash
