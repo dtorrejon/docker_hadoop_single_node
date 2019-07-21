@@ -47,8 +47,8 @@ RUN yum install epel-release -y \
  && rm jdk-12.0.2_linux-x64_bin.rpm-* 
 
 
-#HADOOP HDFS config files
-COPY /vol/xml/hdfs/ /opt/hadoop-3.2.0/etc/hadoop/
+#HADOOP config files
+COPY /vol/xml/ /opt/hadoop-3.2.0/etc/hadoop/
 
 #Startup script
 COPY /vol/entrypoint.sh /home/hadoop/entrypoint.sh
@@ -63,7 +63,6 @@ COPY /vol/sudoers.txt /etc/sudoers
 
 #SSHD config file
 COPY /vol/sshd_config.txt /etc/ssh/sshd_config
-COPY /vol/welcome.txt /etc/hadoop-welcome.txt
 
 #scrip used in order to format & start the pseudo-distributed node
 COPY /vol/hadoop-start.sh /home/hadoop/hadoop-start.sh
@@ -83,9 +82,6 @@ RUN sudo ssh-keygen -f /etc/ssh/ssh_host_rsa_key -t rsa -N '' \
 
 #HDFS format
  && /opt/hadoop-3.2.0/bin/hdfs namenode -format 
-
-#HADOOP YARN config files
-COPY /vol/xml/yarn/ /opt/hadoop-3.2.0/etc/hadoop/
 
 #SSH
 EXPOSE 22 \
