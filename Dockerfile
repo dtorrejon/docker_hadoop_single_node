@@ -4,7 +4,7 @@ LABEL version="0.1"
 LABEL maintainer="dtorrejon"
 LABEL email="david.torrejon.vazquez@gmail.com"
 LABEL hadoop_version="hadoop-3.2.0."
-LABEL java_version="jdk-12.0.2"
+LABEL java_version="jdk-8u221"
 
 #COPY JAVA & HADOOP bin files
 COPY /vol/hadoop/ .
@@ -151,7 +151,6 @@ EXPOSE 22 \
        9000
 
 #Enter as HADOOP user
-
 WORKDIR /home/hadoop
 ENTRYPOINT ["./entrypoint.sh"]
 

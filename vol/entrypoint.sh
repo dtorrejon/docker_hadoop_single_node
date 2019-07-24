@@ -18,6 +18,4 @@ echo "starting hadoop..."
 echo "starting service for saving history jobs..."
 /opt/hadoop-3.2.0/bin/mapred --daemon start historyserver
 
-cat /home/hadoop/hadoop-welcome.txt
-
 bash
