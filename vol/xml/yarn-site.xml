@@ -22,6 +22,23 @@
         <value>JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_MAPRED_HOME</value>
     </property>
 
+    <property>
+
+<name>yarn.application.classpath</name>
+     <value>
+                /opt/hadoop-3.2.0/etc/hadoop,
+                /opt/hadoop-3.2.0/share/hadoop/common/*,
+                /opt/hadoop-3.2.0/share/hadoop/common/lib/*,
+                /opt/hadoop-3.2.0/share/hadoop/hdfs/*,
+                /opt/hadoop-3.2.0/share/hadoop/hdfs/lib/*,
+                /opt/hadoop-3.2.0/share/hadoop/mapreduce/*,
+                /opt/hadoop-3.2.0/share/hadoop/mapreduce/lib/*,
+                /opt/hadoop-3.2.0/share/hadoop/yarn/*,
+                /opt/hadoop-3.2.0/share/hadoop/yarn/lib/*
+</value>
+
+</property>
+
 <!-- Site specific YARN configuration properties -->
 
 <property>
@@ -43,5 +60,6 @@
         <name>yarn.nodemanager.vmem-check-enabled</name>
         <value>false</value>
 </property>
+
 
 </configuration>
